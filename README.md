@@ -29,6 +29,7 @@ To colorize your logs, add a six digit hexadecimal color preffix like this:
 print("#ff0000 a red rose")
 print("#00ff00 in the green grass")
 ```
+Or if you need a minimal logging tool to produce the logs you saw at the top, I included [one](https://github.com/j4n0/HexColors/blob/master/Console/Console/Logger.swift) in the example project.
 
 # Installation
 
