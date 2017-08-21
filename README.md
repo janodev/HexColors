@@ -15,6 +15,7 @@ Table of Contents
   * [Troubleshooting](#troubleshooting)
     * [Xcode update](#xcode-update)
     * [Reset Load Bundle](#reset-load-bundle)
+    * [Could not launch Xcode](#could-not-launch-xcode)
   * [How does it work](#how-does-it-work)
     * [The code](#the-code)
     * [How to write a plugin](#how-to-write-a-plugin)
@@ -46,14 +47,19 @@ Or if you need a minimal logging tool to produce the logs you saw at the top, I 
 
 ## Unsign Xcode
 
-Clone https://github.com/steakknife/unsign, run make, put the unsign command in the path, close Xcode and do this:
-```swift
-cd /Applications/Xcode-beta.app/Contents/MacOS
-sudo unsign Xcode
+Add [unsign](https://github.com/steakknife/unsign) to the path:
+```
+git clone https://github.com/j4n0/HexColors.git
+cd HexColors/other/Unsign
+make
+cp unsign /Applications/Xcode-beta.app/Contents/MacOS
+```
+Unsign Xcode:
+```
+sudo ./unsign Xcode
 sudo mv Xcode Xcode.signed
 sudo ln -sf Xcode.unsigned Xcode
 ```
-
 Because Xcode is no longer signed, Gatekeeper will prevent it from running. There are three ways to solve this:
 
   - *Disable Gatekeeper*. Go to Security & Privacy > General and click _Allow Apps downloaded from: Anywhere_. If 'Anywhere' doesn’t appear as an option, run `sudo spctl --master-disable` from a terminal and relaunch System Preferences.
@@ -62,7 +68,7 @@ Because Xcode is no longer signed, Gatekeeper will prevent it from running. Ther
 	  - Tag Xcode with an arbitrary string: `spctl --add --label "Unsigned Xcode" /Applications/Xcode-beta.app`
     - Approve all apps with that arbitrary string: `spctl --enable --label "Approved"`
 
-If you ever want to revert to a signed Xcode (don’t do it now!), just change the symbolic link that you created before:
+If you ever want to revert to a signed Xcode, change the symbolic link:
 ```swift
 cd /Applications/Xcode-beta.app/Contents/MacOS
 sudo ln -sf Xcode.signed Xcode
@@ -98,14 +104,22 @@ XCODEUUID=`defaults read /Applications/Xcode-beta.app/Contents/Info DVTPlugInCom
 
 This will update the UUID in all plug-ins installed. Note that I’m using Xcode-beta.app (because I’m nearly always using a beta). Change it to Xcode.app if you are using the official version.
 
-# Reset Load Bundle
+## Reset Load Bundle
 
-When you first start Xcode you are offered to “Load Bundle”: 
+When you first start Xcode you are offered to load the plug-in: 
 
 ![load bundle](https://github.com/j4n0/HexColors/blob/master/sources/docs/load-bundle.png?raw=true)<br/>
-If you click Cancel the plug-in won’t load and you won’t be asked again. To reset the dialog, close Xcode and run: 
+If you choose to Skip Bundle you won’t be asked again. To reset the dialog, close Xcode and run: 
 ```bash
 xcode=`defaults read com.apple.dt.Xcode | grep PlugIns | tail -1 | awk -F\" '{ print $2 }'`; defaults delete com.apple.dt.Xcode $xcode
+```
+
+## Could not launch Xcode
+
+You can debug this plug-in by clicking Product > Run (⌘R). This will launch another Xcode in debug mode. However, if your Xcode is not called Xcode.app (for instance, because you are running a beta), an error dialog will appear: “Could not launch Xcode”. Run this to solve it:
+```
+cd /Applications
+ln -s Xcode-beta.app Xcode.app
 ```
 
 # How does it work
