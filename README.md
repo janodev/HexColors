@@ -13,6 +13,8 @@ Table of Contents
     * [Unsign Xcode](#unsign-xcode)
     * [Why do I have to unsign Xcode?](#why-do-i-have-to-unsign-xcode)
   * [Troubleshooting](#troubleshooting)
+    * [Plug-in stopped working after a Xcode update](#plug-in-stopped-working-after-a-xcode-update)
+    * [Reset Load Bundle](#reset-load-bundle)
   * [How does it work](#how-does-it-work)
     * [The code](#the-code)
     * [How to write a plugin](#how-to-write-a-plugin)
@@ -96,9 +98,11 @@ XCODEUUID=`defaults read /Applications/Xcode-beta.app/Contents/Info DVTPlugInCom
 
 This will update the UUID in all plug-ins installed. Note that I’m using Xcode-beta.app (because I’m nearly always using a beta). Change it to Xcode.app if you are using the official version.
 
-# Troubleshooting
+# Reset Load Bundle
 
-If you didn’t click “Load Bundle” when offered, the plug-in won’t start, and you won’t be asked again. To be asked again, close Xcode and run the following: 
+When you first start Xcode you are offered to “Load Bundle”: 
+![load bundle](https://github.com/j4n0/HexColors/blob/master/sources/docs/load-bundle.png?raw=true)
+If you click Cancel the plug-in won’t load and you won’t be asked again. To reset the dialog, close Xcode and run the following: 
 ```bash
 xcode=`defaults read com.apple.dt.Xcode | grep PlugIns | tail -1 | awk -F\" '{ print $2 }'`; defaults delete com.apple.dt.Xcode $xcode
 ```

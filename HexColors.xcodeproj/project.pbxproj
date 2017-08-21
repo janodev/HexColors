@@ -29,6 +29,8 @@
 /* Begin PBXFileReference section */
 		3A8097EE1F48774800C2F8E4 /* HexColorsPlugin.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HexColorsPlugin.m; sourceTree = "<group>"; };
 		3A8097F01F48775800C2F8E4 /* HexColorsPlugin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HexColorsPlugin.h; sourceTree = "<group>"; };
+		3A87F55A1F4ABE84006161F3 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		3A87F55B1F4ABE84006161F3 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		3ABD9FAC1ED408A2007E2873 /* Swizzle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Swizzle.h; sourceTree = "<group>"; };
 		3ABD9FAD1ED408A2007E2873 /* Swizzle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Swizzle.m; sourceTree = "<group>"; };
 		3ABD9FB11ED408A2007E2873 /* HexColors-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HexColors-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -120,6 +122,8 @@
 				3ABD9FAF1ED408A2007E2873 /* targets */,
 				3AE91B0C1ED0ABB40063E782 /* Products */,
 				3ABF8D161F47820F009A5044 /* Frameworks */,
+				3A87F55B1F4ABE84006161F3 /* LICENSE */,
+				3A87F55A1F4ABE84006161F3 /* README.md */,
 			);
 			sourceTree = "<group>";
 		};
