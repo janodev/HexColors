@@ -15,6 +15,7 @@ Table of Contents
   * [Troubleshooting](#troubleshooting)
     * [Xcode update](#xcode-update)
     * [Reset Load Bundle](#reset-load-bundle)
+    * [Could not launch Xcode](#could-not-launch-xcode)
   * [How does it work](#how-does-it-work)
     * [The code](#the-code)
     * [How to write a plugin](#how-to-write-a-plugin)
@@ -98,7 +99,7 @@ XCODEUUID=`defaults read /Applications/Xcode-beta.app/Contents/Info DVTPlugInCom
 
 This will update the UUID in all plug-ins installed. Note that I’m using Xcode-beta.app (because I’m nearly always using a beta). Change it to Xcode.app if you are using the official version.
 
-# Reset Load Bundle
+## Reset Load Bundle
 
 When you first start Xcode you are offered to “Load Bundle”: 
 
@@ -106,6 +107,14 @@ When you first start Xcode you are offered to “Load Bundle”:
 If you click Cancel the plug-in won’t load and you won’t be asked again. To reset the dialog, close Xcode and run: 
 ```bash
 xcode=`defaults read com.apple.dt.Xcode | grep PlugIns | tail -1 | awk -F\" '{ print $2 }'`; defaults delete com.apple.dt.Xcode $xcode
+```
+
+## Could not launch Xcode
+
+You can debug this plug-in by clicking Product > Run (⌘R). This will launch another Xcode in debug mode. However, if your Xcode is not called Xcode.app (for instance, because you are running a beta), an error dialog will appear: “Could not launch Xcode”. Run this to solve it:
+```
+cd /Applications
+ln -s Xcode-beta.app Xcode.app
 ```
 
 # How does it work
