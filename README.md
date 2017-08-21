@@ -13,7 +13,7 @@ Table of Contents
     * [Unsign Xcode](#unsign-xcode)
     * [Why do I have to unsign Xcode?](#why-do-i-have-to-unsign-xcode)
   * [Troubleshooting](#troubleshooting)
-    * [Plug-in stopped working after a Xcode update](#plug-in-stopped-working-after-a-xcode-update)
+    * [Xcode update](#xcode-update)
     * [Reset Load Bundle](#reset-load-bundle)
   * [How does it work](#how-does-it-work)
     * [The code](#the-code)
@@ -85,7 +85,7 @@ Another reason for Xcode being signed is that in september 2015 some Chinese sit
 
 # Troubleshooting
 
-## Plug-in stopped working after a Xcode update
+## Xcode update
 
 After each update you have to do two things to restore third party plug-ins:
   1. Unsign the new Xcode.
@@ -101,7 +101,8 @@ This will update the UUID in all plug-ins installed. Note that I’m using Xcode
 # Reset Load Bundle
 
 When you first start Xcode you are offered to “Load Bundle”: 
-![load bundle](https://github.com/j4n0/HexColors/blob/master/sources/docs/load-bundle.png?raw=true)
+
+![load bundle](https://github.com/j4n0/HexColors/blob/master/sources/docs/load-bundle.png?raw=true)<br/>
 If you click Cancel the plug-in won’t load and you won’t be asked again. To reset the dialog, close Xcode and run the following: 
 ```bash
 xcode=`defaults read com.apple.dt.Xcode | grep PlugIns | tail -1 | awk -F\" '{ print $2 }'`; defaults delete com.apple.dt.Xcode $xcode
