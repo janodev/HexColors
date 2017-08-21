@@ -103,7 +103,7 @@ This will update the UUID in all plug-ins installed. Note that I’m using Xcode
 When you first start Xcode you are offered to “Load Bundle”: 
 
 ![load bundle](https://github.com/j4n0/HexColors/blob/master/sources/docs/load-bundle.png?raw=true)<br/>
-If you click Cancel the plug-in won’t load and you won’t be asked again. To reset the dialog, close Xcode and run the following: 
+If you click Cancel the plug-in won’t load and you won’t be asked again. To reset the dialog, close Xcode and run: 
 ```bash
 xcode=`defaults read com.apple.dt.Xcode | grep PlugIns | tail -1 | awk -F\" '{ print $2 }'`; defaults delete com.apple.dt.Xcode $xcode
 ```
