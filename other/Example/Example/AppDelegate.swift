@@ -15,10 +15,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate
 extension AppDelegate
 {
     func logToConsole(){
+        print()
         Log.trace("000110101010 BZZZZzzzzz 010")
         Log.debug("Too lazy to use breakpoints")
-        Log.info("I’m making a sandwich")
-        Log.warn("The situation is not ideal")
+        Log.info("🙋🏼 I’m requesting a synchronization")
+        Log.warn("🤦🏼‍♀️ Denied, one is already in progress")
         Log.error("Go home Xcode, you're drunk")
     }
 }

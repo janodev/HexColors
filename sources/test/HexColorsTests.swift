@@ -5,6 +5,9 @@ import XCTest
 
 class HexColorsTests: XCTestCase
 {
+    // note: a "valid prefix" is "^\\s*#([A-Fa-f0-9]{6})"
+    
+    // check the identified prefix in the first parameter is equal to the string passed in the second
     private let checkPrefixRange: (String, String?)->() = { line, expected in
         guard let range = HexColors.prefixRange(line) else {
             XCTAssertEqual(expected, nil);
@@ -16,6 +19,7 @@ class HexColorsTests: XCTestCase
     
     func testPrefix_valid()
     {
+        // when passing a string with a valid prefix, the range should match the prefix
         checkPrefixRange("#cafebabe",  "#cafeba")
         checkPrefixRange("#CAFEBABE",  "#CAFEBA")
         checkPrefixRange(" #CAFEBABE", " #CAFEBA")
@@ -23,6 +27,7 @@ class HexColorsTests: XCTestCase
     
     func testPrefix_invalid()
     {
+        // when passing a string with an invalid prefix, the range should be nil
         checkPrefixRange("", nil)
         checkPrefixRange("CAFEBA", nil)
         checkPrefixRange("GGHHII", nil)
@@ -31,35 +36,42 @@ class HexColorsTests: XCTestCase
     }
     
     func testHexDigits(){
+        // when passing a valid prefix, it returns the hex digits
         XCTAssertEqual(HexColors.hexDigits("#cafeba"),  "cafeba")
         XCTAssertEqual(HexColors.hexDigits("#CAFEBA"),  "CAFEBA")
         XCTAssertEqual(HexColors.hexDigits(" #CAFEBA"), "CAFEBA")
     }
     
     func testColor_rgbString(){
+        // when passing six hex digits, it returns the color
         let color = HexColors.color(rgb: "ff0000")
         XCTAssertTrue(isEqual(lhs: color, rhs: NSColor.red))
     }
     
     func testColorizeLine()
     {
-        let prefix = "#ff0000"
-        let text = "roses are red"
+        _testColorizeLine("#ff0000", "roses are red", NSColor.red)
+        _testColorizeLine("#ff0000", "😀", NSColor.red)
+    }
+    
+    func _testColorizeLine(_ prefix: String, _ text: String, _ color: NSColor)
+    {
         let string = prefix + text
         
+        // when colorizing a line
         let attributedString = NSAttributedString(string: string)
         let storage = NSTextStorage(attributedString: attributedString)
-        let substring = storage.string
-        let range = substring.startIndex..<substring.endIndex
-        HexColors.colorizeLine(storage, substring, range)
-
+        HexColors.colorizeLine(storage, string, (string.startIndex..<string.endIndex))
+        
+        // it has the same length
         XCTAssertEqual(storage.string.characters.count, string.characters.count, "length should remain the same")
-
+        
+        // it has a color attribute matching the one in the prefix
         var fullRange: NSRange = NSMakeRange(0, storage.string.characters.count)
         guard let color = storage.attribute(NSAttributedStringKey.foregroundColor, at: 0, effectiveRange: &fullRange) as? NSColor else {
             XCTFail("should be a NSColor"); return
         }
-        XCTAssertTrue(isEqual(lhs: color, rhs: NSColor.red), "color should be red")
+        XCTAssertTrue(isEqual(lhs: color, rhs: color), "color should be red")
     }
     
     // -
