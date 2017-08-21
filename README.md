@@ -47,14 +47,19 @@ Or if you need a minimal logging tool to produce the logs you saw at the top, I 
 
 ## Unsign Xcode
 
-Clone https://github.com/steakknife/unsign, run make, put the unsign command in the path, close Xcode and do this:
-```swift
-cd /Applications/Xcode-beta.app/Contents/MacOS
-sudo unsign Xcode
+Add [unsign](https://github.com/steakknife/unsign) to the path:
+```
+git clone https://github.com/j4n0/HexColors.git
+cd HexColors/other/Unsign
+make
+cp unsign /Applications/Xcode-beta.app/Contents/MacOS
+```
+Unsign Xcode:
+```
+sudo ./unsign Xcode
 sudo mv Xcode Xcode.signed
 sudo ln -sf Xcode.unsigned Xcode
 ```
-
 Because Xcode is no longer signed, Gatekeeper will prevent it from running. There are three ways to solve this:
 
   - *Disable Gatekeeper*. Go to Security & Privacy > General and click _Allow Apps downloaded from: Anywhere_. If 'Anywhere' doesn’t appear as an option, run `sudo spctl --master-disable` from a terminal and relaunch System Preferences.
@@ -63,7 +68,7 @@ Because Xcode is no longer signed, Gatekeeper will prevent it from running. Ther
 	  - Tag Xcode with an arbitrary string: `spctl --add --label "Unsigned Xcode" /Applications/Xcode-beta.app`
     - Approve all apps with that arbitrary string: `spctl --enable --label "Approved"`
 
-If you ever want to revert to a signed Xcode (don’t do it now!), just change the symbolic link that you created before:
+If you ever want to revert to a signed Xcode, change the symbolic link:
 ```swift
 cd /Applications/Xcode-beta.app/Contents/MacOS
 sudo ln -sf Xcode.signed Xcode
