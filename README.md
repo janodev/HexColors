@@ -26,7 +26,7 @@ Table of Contents
 
 # Usage
 
-To colorize your logs, add a six digit hexadecimal color preffix like this:
+To colorize your logs, add a six digit hexadecimal color prefix like this:
 
 ```swift
 print("#ff0000 a red rose")
@@ -229,7 +229,7 @@ I got 315 hits. Filtering with `| sort | uniq` returned 90 unique view classes. 
 References
 ----------
 
-I learned from these articles:
+I learnt from these articles:
 
   - How To Create an Xcode Plugin [1](https://www.raywenderlich.com/94020/creating-an-xcode-plugin-part-1), [2](https://www.raywenderlich.com/97756/creating-an-xcode-plugin-part-2), [3](https://www.raywenderlich.com/104479/creating-an-xcode-plugin-part-3)
   - [Creating an Xcode plugin](https://github.com/zolomatok/Creating-an-Xcode-plugin)
