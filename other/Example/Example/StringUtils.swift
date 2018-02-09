@@ -23,7 +23,7 @@ public struct StringUtils
     
     fileprivate static func pad(_ side: Side, string: String, toLength newLength: Int, withPad character: Character = " ") -> String
     {
-        let length = string.characters.count
+        let length = string.count
         guard newLength > length else {
             return string
         }
@@ -33,7 +33,7 @@ public struct StringUtils
     
     fileprivate static func truncate(_ dropSide: Side, string: String, toLength newLength: Int) -> String
     {
-        let length = string.characters.count
+        let length = string.count
         guard newLength < length else {
             return string
         }
@@ -50,7 +50,7 @@ public struct StringUtils
     
     fileprivate static func replaceCharacter(string: String, character: Character, side: Side) -> String
     {
-        guard string.characters.count > 1 else {
+        guard string.count > 1 else {
             return string
         }
         var s = string

@@ -22,7 +22,7 @@ public class HexColors: NSObject
             let rgbString = HexColors.hexDigits(prefix)
             let color = HexColors.color(rgb: rgbString)
             storage.addAttribute(NSAttributedStringKey.foregroundColor, value: color, range: NSRange(substringRange, in: storage.string))
-            storage.addAttribute(NSAttributedStringKey.font, value: NSFont.systemFont(ofSize: 0.1), range: NSMakeRange(NSRange(substringRange, in: storage.string).location, prefix.characters.count))
+            storage.addAttribute(NSAttributedStringKey.font, value: NSFont.systemFont(ofSize: 0.1), range: NSMakeRange(NSRange(substringRange, in: storage.string).location, prefix.count))
 
             // Setting the font to 0.1 is enough to make it invisible without touching the contents.
             // Another option is implementing NSLayoutManagerDelegate to set NSGlyphPropertyNull for glyphs in the prefix, but this is simpler.

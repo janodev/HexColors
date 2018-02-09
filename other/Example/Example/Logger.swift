@@ -129,7 +129,7 @@ struct LoggerFormatter
     
     fileprivate static func resizeString(string: String, newLength: Int) -> String
     {
-        let length = string.characters.count
+        let length = string.count
         if length < newLength {
             return StringUtils.padLeft(string: string, toLength: newLength)
         } else {
